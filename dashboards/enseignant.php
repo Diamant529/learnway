@@ -110,7 +110,10 @@ if (!empty($evalIds)) {
         <?php if (!empty($modules)): ?>
         <button class="btn btn-primary" onclick="document.getElementById('createCourseDialog').showModal()">+ Créer un Cours</button>
         <?php else: ?>
-        <span style="color: var(--color-warning); font-size: 0.85rem;">⚠ Aucun module ne vous est affecté. Contactez le promoteur.</span>
+        <span style="color: var(--color-warning); font-size: 0.85rem; display: inline-flex; align-items: center; gap: .35rem;">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            Aucun module ne vous est affecté. Contactez le promoteur.
+        </span>
         <?php endif; ?>
     </div>
     <?php if (empty($courses)): ?>
@@ -165,8 +168,9 @@ if (!empty($evalIds)) {
         ?>
         <?php foreach ($lessonsByCourse as $courseTitle => $courseLessons): ?>
         <div style="margin-bottom: 2rem;">
-            <h3 style="color: var(--color-accent); font-size:1rem; margin-bottom:1rem; padding-bottom:.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);">
-                📚 <?= htmlspecialchars($courseTitle) ?>
+            <h3 style="color: var(--color-accent); font-size:1rem; margin-bottom:1rem; padding-bottom:.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: .4rem;">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                <?= htmlspecialchars($courseTitle) ?>
             </h3>
             <?php foreach ($courseLessons as $l): ?>
             <div class="glass-card" style="padding: 1.25rem; margin-bottom: 1rem; border-radius: var(--border-radius-sm);">
@@ -179,15 +183,15 @@ if (!empty($evalIds)) {
                         <p style="color:var(--text-secondary);font-size:.85rem;margin-bottom:.75rem;"><?= htmlspecialchars($l['description'] ?? '') ?></p>
                         <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
                             <?php if ($l['pdf_path']): ?>
-                                <span class="badge badge-info">📄 PDF joint</span>
+                                <span class="badge badge-info">PDF joint</span>
                             <?php endif; ?>
                             <?php if ($l['video_path']): ?>
-                                <span class="badge badge-info">🎬 Vidéo jointe</span>
+                                <span class="badge badge-info">Vidéo jointe</span>
                             <?php endif; ?>
                             <?php if ($l['eval_id']): ?>
-                                <span class="badge badge-success">✅ QCM créé</span>
+                                <span class="badge badge-success">QCM créé</span>
                             <?php else: ?>
-                                <span class="badge badge-warning">⚠ Pas de QCM</span>
+                                <span class="badge badge-warning">Pas de QCM</span>
                             <?php endif; ?>
                         </div>
                     </div>
