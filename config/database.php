@@ -12,7 +12,8 @@ if (session_status() === PHP_SESSION_NONE) {
     // Empêcher le vol de session par fixation de session
     ini_set('session.use_strict_mode', 1);
 
-    $secureCookie = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+    $secureCookie = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 
     session_set_cookie_params([
         'lifetime' => 0,
@@ -63,6 +64,22 @@ try {
             PDO::ATTR_EMULATE_PREPARES => false,
         ]
     );
+
+    // Auto-initialisation de la base de données (création des tables et seeds) si elle est vide
+    $dbNeedsInit = false;
+    try {
+        $stmt = $pdo->query("SELECT 1 FROM users LIMIT 1");
+    } catch (PDOException $e) {
+        $dbNeedsInit = true;
+    }
+
+    if ($dbNeedsInit) {
+        $sqlPath = __DIR__ . '/../database.sql';
+        if (file_exists($sqlPath)) {
+            $sql = file_get_contents($sqlPath);
+            $pdo->exec($sql);
+        }
+    }
 } catch (PDOException $e) {
     // En production, afficher un message d'erreur générique.
     // Pour le développement local, afficher le détail de l'erreur.
