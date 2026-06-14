@@ -157,11 +157,12 @@ function showResults(result) {
             if (result.certificate_generated) {
                 certZone.innerHTML = `
                     <div class="alert alert-success glass-panel" style="text-align:center;">
-                        🎉 <strong>Félicitations !</strong> Vous avez complété ce module à 100% !<br>
+                        <strong>Félicitations !</strong> Vous avez complété ce module à 100% !<br>
                         Votre certificat <strong>#${result.certificate_number}</strong> a été émis.<br>
                         <a href="/actions/download_certificate.php?module_id=${document.getElementById('evalForm')?.dataset?.moduleId || ''}" 
-                           class="btn btn-filled" style="margin-top:1rem;display:inline-flex;">
-                           📄 Télécharger mon certificat
+                           class="btn btn-filled" style="margin-top:1rem;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem;">
+                           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                           Télécharger mon certificat
                         </a>
                     </div>`;
             } else {
@@ -169,8 +170,9 @@ function showResults(result) {
                     <div class="alert alert-info glass-panel" style="text-align:center;background:rgba(59,130,246,.1);color:var(--color-info);border-left-color:var(--color-info);">
                         Votre certificat #${result.certificate_number} est disponible.<br>
                         <a href="/actions/download_certificate.php?module_id=${document.getElementById('evalForm')?.dataset?.moduleId || ''}" 
-                           class="btn btn-primary" style="margin-top:1rem;display:inline-flex;">
-                           📄 Télécharger mon certificat
+                           class="btn btn-primary" style="margin-top:1rem;display:inline-flex;align-items:center;justify-content:center;gap:0.35rem;">
+                           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                           Télécharger mon certificat
                         </a>
                     </div>`;
             }
